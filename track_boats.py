@@ -47,7 +47,7 @@ async def listen(mmsis, state, stats, boxes, use_filter):
     if use_filter:
         sub["FiltersShipMMSI"] = list(mmsis)
     try:
-        async with websockets.connect(URL) as ws:
+        async with websockets.connect(URL, open_timeout=25) as ws:
             log("Connesso ad AISstream, sottoscrizione inviata")
             await ws.send(json.dumps(sub))
             while True:
