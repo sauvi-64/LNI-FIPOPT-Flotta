@@ -86,9 +86,19 @@ async def listen(mmsis, state, stats, boxes, use_filter):
         stats["conn_error"] = repr(e)
 
 
+async def keep_listening(mmsis, state, stats, boxes, use_filter):
+    # Se la connessione cade o non si apre, riprova finche' dura il tempo di ascolto
+    while True:
+        await listen(mmsis, state, stats, boxes, use_filter)
+        if stats.get("error"):
+            return  # errore vero del servizio (es. chiave): inutile insistere
+        log("Riprovo la connessione tra 5 secondi...")
+        await asyncio.sleep(5)
+
+
 async def run_phase(mmsis, state, stats, boxes, use_filter, seconds):
     try:
-        await asyncio.wait_for(listen(mmsis, state, stats, boxes, use_filter), timeout=seconds)
+        await asyncio.wait_for(keep_listening(mmsis, state, stats, boxes, use_filter), timeout=seconds)
     except asyncio.TimeoutError:
         pass  # normale: tempo di ascolto finito
 
