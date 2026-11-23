@@ -20,11 +20,11 @@ jobs:
       - run: python track_boats.py
         env:
           AISSTREAM_KEY: ${{ secrets.AISSTREAM_KEY }}
-          LISTEN_SECONDS: "300"
+          LISTEN_SECONDS: "90"
       - name: Salva i file aggiornati
         run: |
           git config user.name "boats-bot"
           git config user.email "boats-bot@users.noreply.github.com"
-          git add boats.geojson state.json
+          git add boats.geojson boats.kml state.json
           git diff --staged --quiet || git commit -m "Aggiornamento posizioni"
           git push
