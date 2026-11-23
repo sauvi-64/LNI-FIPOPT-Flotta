@@ -81,6 +81,9 @@ async def listen(mmsis, state, stats, boxes, use_filter):
     except websockets.exceptions.ConnectionClosed as e:
         log("Connessione chiusa dal servizio:", e)
         stats["closed"] = str(e)
+    except Exception as e:
+        log("ERRORE di connessione:", type(e).__name__, e)
+        stats["conn_error"] = repr(e)
 
 
 async def run_phase(mmsis, state, stats, boxes, use_filter, seconds):
