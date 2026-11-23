@@ -152,7 +152,40 @@ async def main():
         json.dump(state, f, indent=1)
     with open(OUT_FILE, "w", encoding="utf-8") as f:
         json.dump({"type": "FeatureCollection", "features": features}, f, indent=1)
-    log(f"{len(features)} barche su {len(mmsis)} nel file {OUT_FILE}")
+    # File KML per Windy: icona di barca, nome e MMSI
+    from xml.sax.saxutils import escape
+    placemarks = []
+    for ft in features:
+        pr = ft["properties"]
+        lon, lat = ft["geometry"]["coordinates"]
+        desc = f"MMSI {pr['mmsi']} - ultima posizione: {pr['last_position']}"
+        if pr.get("speed_kn") is not None:
+            desc += f" - velocita: {pr['speed_kn']} nodi"
+        placemarks.append(
+            "    <Placemark>\n"
+            f"      <name>{escape(str(pr['name']))}</name>\n"
+            f"      <description>{escape(desc)}</description>\n"
+            "      <styleUrl>#barca</styleUrl>\n"
+            f"      <Point><coordinates>{lon},{lat},0</coordinates></Point>\n"
+            "    </Placemark>"
+        )
+    kml = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<kml xmlns="http://www.opengis.net/kml/2.2">\n'
+        "  <Document>\n"
+        "    <name>Flotta</name>\n"
+        '    <Style id="barca">\n'
+        "      <IconStyle>\n"
+        "        <scale>1.2</scale>\n"
+        "        <Icon><href>http://maps.google.com/mapfiles/kml/shapes/sailing.png</href></Icon>\n"
+        "      </IconStyle>\n"
+        "    </Style>\n"
+        + "\n".join(placemarks)
+        + "\n  </Document>\n</kml>\n"
+    )
+    with open("boats.kml", "w", encoding="utf-8") as f:
+        f.write(kml)
+    log(f"{len(features)} barche su {len(mmsis)} nel file {OUT_FILE} e boats.kml")
 
 
 asyncio.run(main())
