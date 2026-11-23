@@ -1,4 +1,22 @@
 {
  "type": "FeatureCollection",
- "features": []
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     10.24124,
+     43.85552
+    ]
+   },
+   "properties": {
+    "name": "OASIS-I-Prova",
+    "mmsi": "249646000",
+    "speed_kn": 0,
+    "course": 146.7,
+    "last_position": "2026-11-23 17:13:21.118271288 +0000 UTC"
+   }
+  }
+ ]
 }
