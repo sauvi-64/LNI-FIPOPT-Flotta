@@ -20,7 +20,7 @@ jobs:
       - run: python track_boats.py
         env:
           AISSTREAM_KEY: ${{ secrets.AISSTREAM_KEY }}
-          LISTEN_SECONDS: "90"
+          LISTEN_SECONDS: "300"
       - name: Salva i file aggiornati
         run: |
           git config user.name "boats-bot"
