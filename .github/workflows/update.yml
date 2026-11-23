@@ -1,0 +1,30 @@
+name: Aggiorna posizioni barche
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"   # ogni 10 minuti circa (GitHub può ritardare)
+  workflow_dispatch:          # per lanciarlo a mano dal sito
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install websockets
+      - run: python track_boats.py
+        env:
+          AISSTREAM_KEY: ${{ secrets.AISSTREAM_KEY }}
+          LISTEN_SECONDS: "90"
+      - name: Salva i file aggiornati
+        run: |
+          git config user.name "boats-bot"
+          git config user.email "boats-bot@users.noreply.github.com"
+          git add boats.geojson state.json
+          git diff --staged --quiet || git commit -m "Aggiornamento posizioni"
+          git push
