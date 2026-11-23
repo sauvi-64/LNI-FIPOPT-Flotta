@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Flotta</name>
+    <Style id="barca">
+      <IconStyle>
+        <scale>1.2</scale>
+        <Icon><href>http://maps.google.com/mapfiles/kml/shapes/sailing.png</href></Icon>
+      </IconStyle>
+    </Style>
+    <Placemark>
+      <name>OASIS-I-Prova</name>
+      <description>MMSI 249646000 - ultima posizione: 2026-11-23 17:13:21.118271288 +0000 UTC - velocita: 0 nodi</description>
+      <styleUrl>#barca</styleUrl>
+      <Point><coordinates>10.24124,43.85552,0</coordinates></Point>
+    </Placemark>
+  </Document>
+</kml>
