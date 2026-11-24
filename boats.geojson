@@ -6,6 +6,23 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
+     8.84013,
+     44.41656
+    ]
+   },
+   "properties": {
+    "name": "JOMAR-Prova",
+    "mmsi": "339926000",
+    "speed_kn": 0,
+    "course": 230.4,
+    "last_position": "2026-11-24 01:58:24.898959759 +0000 UTC"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
      10.24124,
      43.85552
     ]
