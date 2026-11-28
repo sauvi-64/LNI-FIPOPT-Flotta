@@ -10,9 +10,9 @@
     </Style>
     <Placemark>
       <name>JOMAR-Prova</name>
-      <description>MMSI 339926000 - ultima posizione: 2026-11-27 07:49:47.666865406 +0000 UTC - velocita: 0 nodi</description>
+      <description>MMSI 339926000 - ultima posizione: 2026-11-28 00:43:48.649145514 +0000 UTC - velocita: 0 nodi</description>
       <styleUrl>#barca</styleUrl>
-      <Point><coordinates>8.8401,44.41654,0</coordinates></Point>
+      <Point><coordinates>8.84015,44.41653,0</coordinates></Point>
     </Placemark>
     <Placemark>
       <name>OASIS-I-Prova</name>
